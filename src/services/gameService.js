@@ -36,19 +36,39 @@ const deleteGame = async (req, res) => {
 };
 
 const getGameByName = async (gameName) => {
-    return await gameSchema.findOne({name:gameName});
+    try {
+        return await gameSchema.findOne({name:gameName});
+    } catch (error) {
+        console.log(error);
+    }
+    
 };
 
 const getGameByDeveloper = async (gameDeveloper) => {
-    return await gameSchema.find({developer:gameDeveloper});
+    try {
+        return await gameSchema.find({developer:gameDeveloper});
+    } catch (error) {
+        console.log(error);
+    }
+    
 };
 
 const getGameByGenre = async (gameGenre) => {
-    return await gameSchema.find({genre:gameGenre});
+    try {
+        return await gameSchema.find({genre:gameGenre});
+    } catch (error) {
+        console.log(error); 
+    }
+    
 };
 
 const getGamesByMode = async (gameMode) => {
-    return await gameSchema.find({mode:gameMode});
+    try {
+        return await gameSchema.find({mode:gameMode});
+    } catch (error) {
+        console.log(error);
+    }
+    
 };
 
 
@@ -64,7 +84,12 @@ const deleteGameByName = async (gameName) => {
 const putGame = async (req, res) => {
     const { id } = req.params;
     const { name, developer, genre, mode } = req.body;
-    return gameSchema.updateOne({ _id: id },{ $set: { name, developer, genre, mode } });
+    try{
+        return gameSchema.updateOne({ _id: id },{ $set: { name, developer, genre, mode } });
+    } catch (error) {
+        console.log(error);
+    }
+    
 };
 
 
