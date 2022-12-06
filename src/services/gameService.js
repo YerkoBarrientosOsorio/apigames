@@ -7,7 +7,7 @@ const getGames = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-   
+    
 };
 
 
@@ -19,6 +19,7 @@ const postGame = async (req, res) => {
         return await game.save();
     } catch (error) {
         console.log(error);
+        res.status(403).send("Game already exists");
     }
     
 };
@@ -30,6 +31,7 @@ const deleteGame = async (req, res) => {
         return gameSchema.remove({ _id: id })
     } catch (error) {
         console.log(error);
+        res.status(404).send("Game not found");
     }
 };
 
@@ -38,8 +40,17 @@ const getGameByName = async (gameName) => {
 };
 
 const getGameByDeveloper = async (gameDeveloper) => {
-    return await gameSchema.findOne({developer:gameDeveloper});
+    return await gameSchema.find({developer:gameDeveloper});
 };
+
+const getGameByGenre = async (gameGenre) => {
+    return await gameSchema.find({genre:gameGenre});
+};
+
+const getGamesByMode = async (gameMode) => {
+    return await gameSchema.find({mode:gameMode});
+};
+
 
 
 const deleteGameByName = async (gameName) => {
@@ -70,5 +81,7 @@ module.exports = {
     getGameByName,
     putGame,
     deleteGameByName,
-    getGameByDeveloper
+    getGameByDeveloper,
+    getGameByGenre,
+    getGamesByMode
 };

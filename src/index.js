@@ -8,17 +8,15 @@ const app = express();
 const port = process.env.PORT;
 app.use(cors());
 
-//mongobd
-mongoose
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log("Connected"))
-    .catch((error) => console.error(error));
+    .catch((error) => {
+        console.error(error);
+    });
 
-//middleware
 app.use(express.json());
 app.use('/api', gameRoutes);
 
-//rutas
 app.get("/", (req, res) => {
     res.send("Videogame API");
 });

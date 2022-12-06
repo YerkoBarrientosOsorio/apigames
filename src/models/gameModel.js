@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const gameSchema = mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     }, 
     developer: {
         type: String,
